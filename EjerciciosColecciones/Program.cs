@@ -242,7 +242,14 @@ do
     if (matrizX[posicionX, posicionY].Equals("X")) Console.WriteLine("Acertaste");
     else vidas--;
 } while (vidas > 0);
-
+for (int i = 0; i < 10; i++)
+{
+    for (int j = 0; j < 10; j++)
+    {
+        Console.Write(matrizX[i, j] + " ");
+    }
+    Console.WriteLine();
+}
 
 /*Diccionario de calificaciones: Crear un diccionario donde la clave sea el nombre del
 alumno y el valor sea su nota. El programa debe permitir:
@@ -250,7 +257,51 @@ a. Agregar alumnos y sus notas.
 b. Mostrar el promedio general del curso.
 c. Indicar el alumno con mejor nota y el de peor nota.
 d. Hint: usar Dictionary<string, double> y recorrer con foreach*/
+
 Console.WriteLine("Ejercicio 9: Diccionario de calificaciones");
+Dictionary<string, double> calificaciones = new Dictionary<string, double>();
+calificaciones.Add("Gomez", 2.0);
+calificaciones.Add("Gonzalez", 2.0);
+calificaciones.Add("Gutierrez", 9.0);
+calificaciones.Add("Oztajchuk", 8.0);
+calificaciones.Add("Desoxirribonucleico", 4.0);
+calificaciones.Add("Lopez", 7.0);
+calificaciones.Add("Cesar", 6.0);
+calificaciones.Add("Pantic", 8.0);
+calificaciones.Add("Roman", 10.0);
+calificaciones.Add("Riquelme", 10.0);
+string opcion = "";
+do
+{
+    Console.WriteLine("Menú:" +
+    "a. Agregar alumnos y sus notas.\r\n" +
+    "b. Mostrar el promedio general del curso.\r\n" +
+    "c. Indicar el alumno con mejor nota y el de peor nota.\r\n" +
+    "d. Salir");
+    opcion = Console.ReadLine();
+    switch (opcion)
+    {
+        case "a":
+            Console.WriteLine("Ingrese el alumno y su nota");
+            string nombreAlumno = Console.ReadLine();
+            double notaAlumno = double.Parse(Console.ReadLine());
+            calificaciones.Add(nombreAlumno, notaAlumno);
+            break;
+        case "b":
+            double total = 0;
+            foreach (double nota in calificaciones.Values)
+            {
+                total += nota;
+            }
+            Console.WriteLine("El promedio general del curso es " + (total / calificaciones.Count));
+            break;
+        case "c":
+            Console.WriteLine("La nota mas alta es " + calificaciones.Values.Max() + " y la mas baja es " + calificaciones.Values.Min());
+            break;
+        default:
+            break;
+    }
+} while (opcion != "d");
 /*Simulador de atención en ventanilla: Usar una cola (Queue) para simular la atención
 de clientes en una ventanilla bancaria.
 a. Encolar nombres de clientes.
@@ -258,3 +309,17 @@ b. Atender (desencolar) uno por uno hasta que no queden.
 c. Mostrar en pantalla quién está siendo atendido y cuántos quedan en la fila.
 d. Hint: usar Enqueue(), Dequeue() y Count.*/
 Console.WriteLine("Ejercicio 10: Simulador");
+Queue<string> clientes = new Queue<string>();
+clientes.Enqueue("Alejandro");
+clientes.Enqueue("Vilma");
+clientes.Enqueue("Michel");
+clientes.Enqueue("Axel");
+clientes.Enqueue("Dana");
+clientes.Enqueue("Lisa");
+clientes.Enqueue("Tomy");
+clientes.Enqueue("Lenny");
+clientes.Enqueue("Melany");
+while (clientes.Count > 0)
+{
+    Console.WriteLine("El cliente que está siendo atendido es " + clientes.Dequeue() + " y quedan " + clientes.Count + " clientes más.");
+}
